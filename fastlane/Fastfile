@@ -12,9 +12,56 @@
 default_platform(:ios)
 
 platform :ios do
+
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    build_app(scheme: "blocker")
-    upload_to_testflight
+    test
+    ensure_git_status_clean
+    # Increment the build number (not the version number)
+    build_number = increment_build_number
+    # Commit the version bump, skipping CI Build
+    commit_version_bump(message:"[ci skip] Version Bump to #{build_number}")
+    # Push new build number
+    push_to_git_remote
+
+    sync_code_signing(type: "appstore")
+    build_app
+    upload_to_testflight(changelog: "Here is what's new with Blocker:")
   end
-end
+
+  desc "Deploy release to iTunes Connect"
+  lane :release do
+    # Ensure that your git status is not dirty
+    ensure_git_status_clean
+    # Increment Version Number
+    version_number = increment_version_number
+    # Commit the version bump
+    commit_version_bump(message:"[ci skip] Version Bump to #{version_number}")
+    # Add a git tag for this build. This will automatically
+    # use an appropriate git tag name
+    add_git_tag
+    # Push the new commit and tag back to your git remote
+    push_to_git_remote
+    sync_code_signing(type: "appstore")  # see code signing guide for more information
+    # Build App
+    build_app(include_bitcode: true)
+    upload_to_app_store                  # upload your app to iTunes Connect
+  end
+
+
+
+  lane :test do
+    desc "Run Blocker Tests"
+    # Install Pods
+    run_tests(devices: ["iPhone 6s"],
+      scheme: "blocker")
+      # Compute the code coverage
+      slather(cobertura_xml: true,
+        scheme: "blocker",
+        simple_output: true,
+        travis_pro: true,
+        proj: "blocker.xcodeproj"
+      )
+    end
+
+  end
