@@ -1,10 +1,10 @@
 [
-    {
-        "action": {
-            "type": "block"
-        },
-        "trigger": {
-            "url-filter": "webkit.svg"
-        }
-    }
+ 	{
+ 		"action": {
+ 			"type": "block"
+ 		},
+ 		"trigger": {
+ 			"url-filter": ".*reddit.*"
+ 		}
+ 	}
 ]
