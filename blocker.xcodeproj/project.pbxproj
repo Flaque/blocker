@@ -22,6 +22,8 @@
 		4762C1A82061E5DC00329A85 /* BlockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1A62061E5DC00329A85 /* BlockList.swift */; };
 		4762C1AB2061ED0100329A85 /* BlockItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1AA2061ED0100329A85 /* BlockItemManager.swift */; };
 		4762C1AC2061ED0100329A85 /* BlockItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1AA2061ED0100329A85 /* BlockItemManager.swift */; };
+		476499492062F6C3006BB173 /* BlockerListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476499482062F6C3006BB173 /* BlockerListManager.swift */; };
+		4764994A2062F6C7006BB173 /* BlockerListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476499482062F6C3006BB173 /* BlockerListManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,7 @@
 		2578B2B5206183FD0010B271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4762C1A62061E5DC00329A85 /* BlockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockList.swift; sourceTree = "<group>"; usesTabs = 0; };
 		4762C1AA2061ED0100329A85 /* BlockItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockItemManager.swift; sourceTree = "<group>"; };
+		476499482062F6C3006BB173 /* BlockerListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerListManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				4762C1AA2061ED0100329A85 /* BlockItemManager.swift */,
+				476499482062F6C3006BB173 /* BlockerListManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -296,7 +300,7 @@
 					};
 					2578B28D20617F530010B271 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 2578B27620617F530010B271;
 					};
 					2578B29820617F530010B271 = {
@@ -376,6 +380,7 @@
 				4762C1AB2061ED0100329A85 /* BlockItemManager.swift in Sources */,
 				2578B27D20617F530010B271 /* ViewController.swift in Sources */,
 				2578B27B20617F530010B271 /* AppDelegate.swift in Sources */,
+				476499492062F6C3006BB173 /* BlockerListManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +391,7 @@
 				4762C1AC2061ED0100329A85 /* BlockItemManager.swift in Sources */,
 				4762C1A82061E5DC00329A85 /* BlockList.swift in Sources */,
 				2578B29320617F530010B271 /* blockerTests.swift in Sources */,
+				4764994A2062F6C7006BB173 /* BlockerListManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,12 +605,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 77S62VV6V9;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = blockerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Flaque.blockerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/blocker.app/blocker";
@@ -616,12 +623,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 77S62VV6V9;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = blockerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Flaque.blockerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/blocker.app/blocker";

@@ -8,12 +8,16 @@
 
 import Foundation
 
-class BlockItemManger {
+class BlockItemManager {
     
-    static func toggle(item: BlockItem, enable: Bool) {
-        if enable {
-            // Check to see if item exists in blockerList
-            
-        }
+    let listManager: BlockerListManager
+    
+    init(listManager blockerListManager: BlockerListManager) {
+        self.listManager = blockerListManager
+    }
+    
+    func toggle(item: BlockItem, enable: Bool) -> Bool {
+        
+        return enable ? listManager.add(blockItem: item) : listManager.remove(blockItem: item)
     }
 }

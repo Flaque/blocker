@@ -29,6 +29,7 @@ enum Social: BlockItem {
     case myspace
     case pinterest
     case reddit
+    case tumblr
     case twitter
     case youtube
     
@@ -42,8 +43,9 @@ enum Social: BlockItem {
             return ".*4chan.*"
         case .facebook:
             return ".*facebook.*"
+            // We will also need to block `.*fbcdn.*`
         case .gplus:
-            return ""
+            return "*.plus.google.*"
         case .imgur:
             return ".*imgur.*"
         case .instagram:
@@ -54,6 +56,8 @@ enum Social: BlockItem {
             return ".*pinterest.*"
         case .reddit:
             return ".*reddit.*"
+        case .tumblr:
+            return ".*tumblr.*"
         case .twitter:
             return ".*twitter.*"
         case .youtube:
