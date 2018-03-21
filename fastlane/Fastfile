@@ -13,6 +13,10 @@ default_platform(:ios)
 
 platform :ios do
 
+  lane :certificates do
+    match(app_identifier: ["io.rudybermudez.blocker.*"], readonly: true)
+  end
+
   desc "Push a new beta build to TestFlight"
   lane :beta do
     test

@@ -18,6 +18,10 @@
 		2578B2B2206183FD0010B271 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2578B2B1206183FD0010B271 /* blockerList.json */; };
 		2578B2B4206183FD0010B271 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578B2B3206183FD0010B271 /* ContentBlockerRequestHandler.swift */; };
 		2578B2B8206183FD0010B271 /* blocker-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2578B2AF206183FD0010B271 /* blocker-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4762C1A72061E5DC00329A85 /* BlockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1A62061E5DC00329A85 /* BlockList.swift */; };
+		4762C1A82061E5DC00329A85 /* BlockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1A62061E5DC00329A85 /* BlockList.swift */; };
+		4762C1AB2061ED0100329A85 /* BlockItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1AA2061ED0100329A85 /* BlockItemManager.swift */; };
+		4762C1AC2061ED0100329A85 /* BlockItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1AA2061ED0100329A85 /* BlockItemManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +81,8 @@
 		2578B2B1206183FD0010B271 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		2578B2B3206183FD0010B271 /* ContentBlockerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerRequestHandler.swift; sourceTree = "<group>"; };
 		2578B2B5206183FD0010B271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4762C1A62061E5DC00329A85 /* BlockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockList.swift; sourceTree = "<group>"; usesTabs = 0; };
+		4762C1AA2061ED0100329A85 /* BlockItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockItemManager.swift; sourceTree = "<group>"; };
 		477F14762061907D00E5204D /* blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = blocker.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +128,7 @@
 				2578B27820617F530010B271 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		2578B27820617F530010B271 /* Products */ = {
 			isa = PBXGroup;
@@ -137,6 +144,8 @@
 		2578B27920617F530010B271 /* blocker */ = {
 			isa = PBXGroup;
 			children = (
+				4762C1A92061ECED00329A85 /* Managers */,
+				4762C1A52061E5AC00329A85 /* Models */,
 				477F14762061907D00E5204D /* blocker.entitlements */,
 				2578B27A20617F530010B271 /* AppDelegate.swift */,
 				2578B27C20617F530010B271 /* ViewController.swift */,
@@ -175,6 +184,22 @@
 				2578B2B5206183FD0010B271 /* Info.plist */,
 			);
 			path = "blocker-extension";
+			sourceTree = "<group>";
+		};
+		4762C1A52061E5AC00329A85 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4762C1A62061E5DC00329A85 /* BlockList.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4762C1A92061ECED00329A85 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				4762C1AA2061ED0100329A85 /* BlockItemManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,7 +308,7 @@
 					};
 					2578B2AE206183FD0010B271 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -348,7 +373,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4762C1A72061E5DC00329A85 /* BlockList.swift in Sources */,
 				2578B28320617F530010B271 /* blocker.xcdatamodeld in Sources */,
+				4762C1AB2061ED0100329A85 /* BlockItemManager.swift in Sources */,
 				2578B27D20617F530010B271 /* ViewController.swift in Sources */,
 				2578B27B20617F530010B271 /* AppDelegate.swift in Sources */,
 			);
@@ -358,6 +385,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4762C1AC2061ED0100329A85 /* BlockItemManager.swift in Sources */,
+				4762C1A82061E5DC00329A85 /* BlockList.swift in Sources */,
 				2578B29320617F530010B271 /* blockerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,10 +568,10 @@
 				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7ee7355b-b09d-4e9e-9e66-ac1a3d7022d7";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development io.rudybermudez.blocker";
+				PROVISIONING_PROFILE = "0035dc92-d517-40e5-9a00-89024af7a008";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.rudybermudez.blocker.*";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -559,10 +588,10 @@
 				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a92a0a9d-5073-4530-8de7-95e302142da6";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.rudybermudez.blocker";
+				PROVISIONING_PROFILE = "ccc69d94-f7e9-4cd9-9f65-ece536c4f0b1";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.rudybermudez.blocker.*";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -638,12 +667,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 77S62VV6V9;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = "blocker-extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.rudybermudez.blocker.blocker-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0035dc92-d517-40e5-9a00-89024af7a008";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.rudybermudez.blocker.*";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -654,12 +686,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 77S62VV6V9;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = "blocker-extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.rudybermudez.blocker.blocker-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ccc69d94-f7e9-4cd9-9f65-ece536c4f0b1";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.rudybermudez.blocker.*";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
