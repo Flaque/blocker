@@ -83,7 +83,6 @@
 		2578B2B5206183FD0010B271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4762C1A62061E5DC00329A85 /* BlockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockList.swift; sourceTree = "<group>"; usesTabs = 0; };
 		4762C1AA2061ED0100329A85 /* BlockItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockItemManager.swift; sourceTree = "<group>"; };
-		477F14762061907D00E5204D /* blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = blocker.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +145,6 @@
 			children = (
 				4762C1A92061ECED00329A85 /* Managers */,
 				4762C1A52061E5AC00329A85 /* Models */,
-				477F14762061907D00E5204D /* blocker.entitlements */,
 				2578B27A20617F530010B271 /* AppDelegate.swift */,
 				2578B27C20617F530010B271 /* ViewController.swift */,
 				2578B27E20617F530010B271 /* Main.storyboard */,
@@ -292,7 +290,7 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -303,7 +301,7 @@
 					};
 					2578B29820617F530010B271 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 2578B27620617F530010B271;
 					};
 					2578B2AE206183FD0010B271 = {
@@ -563,15 +561,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = blocker/blocker.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker.app;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0035dc92-d517-40e5-9a00-89024af7a008";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development io.rudybermudez.blocker.*";
+				PROVISIONING_PROFILE = "891e7421-652a-4d4c-801f-4ca83a68b1e3";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.rudybermudez.blocker";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -582,16 +580,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = blocker/blocker.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker.app;
+				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ccc69d94-f7e9-4cd9-9f65-ece536c4f0b1";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.rudybermudez.blocker.*";
+				PROVISIONING_PROFILE = "6496fa48-5d52-4154-a82f-81d67e06ff20";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.rudybermudez.blocker";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -635,12 +632,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 77S62VV6V9;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = blockerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Flaque.blockerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = blocker;
@@ -651,12 +649,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 77S62VV6V9;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = blockerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Flaque.blockerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = blocker;
@@ -672,10 +671,10 @@
 				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = "blocker-extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.rudybermudez.blocker.blocker-extension";
+				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0035dc92-d517-40e5-9a00-89024af7a008";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development io.rudybermudez.blocker.*";
+				PROVISIONING_PROFILE = "8971f496-0e35-418f-a779-a138a6ff9f9b";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.rudybermudez.blocker.extension";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -691,10 +690,10 @@
 				DEVELOPMENT_TEAM = NZ8449Y9W6;
 				INFOPLIST_FILE = "blocker-extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.rudybermudez.blocker.blocker-extension";
+				PRODUCT_BUNDLE_IDENTIFIER = io.rudybermudez.blocker.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ccc69d94-f7e9-4cd9-9f65-ece536c4f0b1";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.rudybermudez.blocker.*";
+				PROVISIONING_PROFILE = "6d0895c2-a113-4ff0-9ce8-12199b9bb68d";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.rudybermudez.blocker.extension";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
