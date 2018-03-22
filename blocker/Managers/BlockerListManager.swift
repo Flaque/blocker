@@ -101,7 +101,7 @@ public class BlockerListManager {
         
         var blockerList = readBlockerList()
         
-        guard check(blockerList: blockerList, for: blockItem) == nil else { return false }
+        guard index(of: blockItem, in: blockerList) == nil else { return false }
         
         let json: JSON = [
             "action": [ "type": "block" ],
@@ -129,20 +129,20 @@ public class BlockerListManager {
         
         var blockerList = readBlockerList()
         
-        guard let index = check(blockerList: blockerList, for: blockItem) else { return false }
+        guard let index = index(of: blockItem, in: blockerList) else { return false }
         
         blockerList.remove(at: index)
         return write(blockerList)
     }
     
     
-    /// Check JSON Array for a `BlockItem`
+    /// Retrieve the index of a `BlockItem` in a `BlockerList`
     ///
     /// - Parameters:
     ///   - blockerList: A JSON Array [[String: Any]]
     ///   - blockItem: A `BlockItem` to check for
     /// - Returns: Optional `Int` that denotes the index of a `BlockItem` in the `BlockerList`
-    fileprivate func check(blockerList: BlockerList, for blockItem: BlockItem) -> Int? {
+    fileprivate func index(of blockItem: BlockItem, in blockerList: BlockerList) -> Int? {
         
         for (index, item) in blockerList.enumerated() {
             guard
