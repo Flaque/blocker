@@ -8,18 +8,36 @@
 
 import Foundation
 
+
 protocol BlockItem {
     
     /// The base URL to filter out
     var urlFilter: String { get }
     
-    
     /// The `NSItemProvider` that of a json file that contains urls to block for a given item. Note this is optional.
     var blocklist: NSItemProvider? { get }
 }
 
+protocol EnumCollection : Hashable {}
+
+extension EnumCollection {
+    static func cases() -> AnySequence<Self> {
+        typealias S = Self
+        return AnySequence { () -> AnyIterator<S> in
+            var raw = 0
+            return AnyIterator {
+                let current : Self = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: S.self, capacity: 1) { $0.pointee } }
+                guard current.hashValue == raw else { return nil }
+                raw += 1
+                return current
+            }
+        }
+    }
+}
+
+
 // Social Network Sources
-enum Social: BlockItem {
+enum Social: BlockItem, EnumCollection {
     
     case facebook
     case fourchan
@@ -43,7 +61,7 @@ enum Social: BlockItem {
             return ".*4chan.*"
         case .facebook:
             return ".*facebook.*"
-            // We will also need to block `.*fbcdn.*`
+        // We will also need to block `.*fbcdn.*`
         case .gplus:
             return "*.plus.google.*"
         case .imgur:
@@ -69,8 +87,8 @@ enum Social: BlockItem {
 
 
 /// News Sources
-enum News: BlockItem {
-
+enum News: BlockItem, EnumCollection {
+    
     case abc
     case aljazeera
     case bloomberg
@@ -150,3 +168,5 @@ enum News: BlockItem {
         }
     }
 }
+
+

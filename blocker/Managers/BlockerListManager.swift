@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SafariServices
 
 fileprivate typealias JSON = [String:Any]
 fileprivate typealias BlockerList = [JSON]
@@ -28,7 +29,7 @@ public class BlockerListManager {
     init() {
         var baseURL: URL?
         
-        if let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+        if let url = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.webblocker") {
             baseURL = url
         }
         
@@ -57,7 +58,7 @@ public class BlockerListManager {
     }
     
     
-    /// Write `BlockerList` to File
+    /// Write `BlockerList` to File & Reload Content Blocker
     ///
     /// - Parameter blockerList: JSON Array to write to file
     /// - Returns: Bool that denotes whether the blockerList was successfully written to file
@@ -65,18 +66,32 @@ public class BlockerListManager {
         
         guard
             let url = blockerListURL,
-            let jsonData = try? JSONSerialization.data(withJSONObject: blockerList, options: .prettyPrinted),
+            let jsonData = try? JSONSerialization.data(withJSONObject: blockerList, options: []),
             let _ = try? jsonData.write(to: url)
         else {
             return false
         }
-       
+        SFContentBlockerManager.reloadContentBlocker(withIdentifier: "io.rudybermudez.blocker.extension", completionHandler: nil)
         return true
+    }
+    
+    // MARK: - Create / Delete Blocker File
+    
+    
+    /// Create Empty Blocker File
+    ///
+    /// - Returns: Bool that denotes whether the blockerList was successfully created
+    @discardableResult
+    public func createEmptyBlockerFile() -> Bool {
+         guard let url = blockerListURL, fileManager.fileExists(atPath: url.path) == false else { return false }
+        
+        return write(readBlockerList())
     }
     
     /// Delete BlockerFile.
     ///
     /// - Returns: true if file was removed or does not exist, false otherwise
+    @discardableResult
     public func deleteBlockerFile() -> Bool {
         guard let url = blockerListURL, fileManager.fileExists(atPath: url.path) == true else { return true }
         do {
@@ -97,13 +112,13 @@ public class BlockerListManager {
     ///   - blockerList: `BlockerList` to add to
     /// - Returns: Bool that denotes whether the `BlockItem` was successfully added to the `BlockerList`
     @discardableResult
-    func add(blockItem: BlockItem) -> Bool {
+    func add<T: BlockItem>(blockItem: T) -> Bool {
         
         var blockerList = readBlockerList()
         
         guard index(of: blockItem, in: blockerList) == nil else { return false }
         
-        let json: JSON = [
+        let json: [String:Any] = [
             "action": [ "type": "block" ],
             "trigger": [ "url-filter": blockItem.urlFilter ]
         ]
@@ -125,7 +140,7 @@ public class BlockerListManager {
     ///   - blockerList: `BlockerList` to remove from
     /// - Returns: Bool that denotes whether the `BlockItem` was successfully removed from the `Blockerlist`
     @discardableResult
-    func remove(blockItem: BlockItem) -> Bool {
+    func remove<T: BlockItem>(blockItem: T) -> Bool {
         
         var blockerList = readBlockerList()
         
@@ -142,7 +157,7 @@ public class BlockerListManager {
     ///   - blockerList: A JSON Array [[String: Any]]
     ///   - blockItem: A `BlockItem` to check for
     /// - Returns: Optional `Int` that denotes the index of a `BlockItem` in the `BlockerList`
-    fileprivate func index(of blockItem: BlockItem, in blockerList: BlockerList) -> Int? {
+    fileprivate func index<T: BlockItem>(of blockItem: T, in blockerList: BlockerList) -> Int? {
         
         for (index, item) in blockerList.enumerated() {
             guard
@@ -156,9 +171,25 @@ public class BlockerListManager {
         return nil
     }
     
+    
+    
+    /// Return a list of actively blocked `BlockItem` in BlockerList
+    ///
+    /// - Parameter blockItem: `BlockItem` Enum to search for
+    /// - Returns: A List of active `BlockItem`
+    func getEnabledItems<T>(blockItem: T.Type) -> [T] where T: EnumCollection & BlockItem {
+        return blockItem.cases().flatMap { index(of: $0, in: readBlockerList()) != nil ?  $0 : nil }
+    }
+    
+    
+    /// Pretty Print the JSON BlockerList
     func debugPrint() {
         print("\n\n=============================\nBegin Debug Print\n")
-        print(readBlockerList())
+        let jsonObject = try? JSONSerialization.data(withJSONObject: readBlockerList(), options: .prettyPrinted)
+        
+        if let jsonString = String(data: jsonObject!, encoding: .utf8) {
+            print(jsonString)
+        }
         print("\n=============================\nEnd Debug Print\n\n")
     }
     

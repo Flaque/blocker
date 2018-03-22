@@ -12,11 +12,21 @@ import MobileCoreServices
 class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
 
     func beginRequest(with context: NSExtensionContext) {
-        let attachment = NSItemProvider(contentsOf: Bundle.main.url(forResource: "blockerList", withExtension: "json"))!
+        
+        
+        guard
+            let baseURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.webblocker"),
+            let attachment = NSItemProvider(contentsOf: baseURL.appendingPathComponent("CustomBlockerList.json", isDirectory: false))
+        else {
+            print("Could not read CustomBlockerList.json")
+            return
+        }
+        
+//        let baseURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.webblocker")!
+//        let attachment = NSItemProvider(contentsOf: baseURL.appendingPathComponent("CustomBlockerList.json", isDirectory: false))!
         
         let item = NSExtensionItem()
         item.attachments = [attachment]
-        
         context.completeRequest(returningItems: [item], completionHandler: nil)
     }
     

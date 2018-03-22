@@ -10,14 +10,29 @@ import Foundation
 
 class BlockItemManager {
     
-    let listManager: BlockerListManager
+    fileprivate let listManager: BlockerListManager
+    
+    init() {
+        self.listManager = BlockerListManager()
+    }
     
     init(listManager blockerListManager: BlockerListManager) {
         self.listManager = blockerListManager
     }
     
-    func toggle(item: BlockItem, enable: Bool) -> Bool {
-        
+    
+    /// Toggles blocking a `BlockItem`
+    ///
+    /// - Parameters:
+    ///   - item: `BlockItem` to add / remove from Blocking
+    ///   - enable: enable/disable the blockItem
+    /// - Returns: Boolean that denotes a successful toggle
+    func toggle<T: BlockItem>(item: T, enable: Bool) -> Bool {
         return enable ? listManager.add(blockItem: item) : listManager.remove(blockItem: item)
     }
+    
+    func activeItems<T: BlockItem & EnumCollection>(type: T.Type) -> [T] {
+        return listManager.getEnabledItems(blockItem: type)
+    }
+    
 }
