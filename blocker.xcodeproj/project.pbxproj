@@ -20,10 +20,14 @@
 		2578B2B8206183FD0010B271 /* blocker-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2578B2AF206183FD0010B271 /* blocker-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4762C1A72061E5DC00329A85 /* BlockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1A62061E5DC00329A85 /* BlockList.swift */; };
 		4762C1A82061E5DC00329A85 /* BlockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1A62061E5DC00329A85 /* BlockList.swift */; };
-		4762C1AB2061ED0100329A85 /* BlockItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1AA2061ED0100329A85 /* BlockItemManager.swift */; };
-		4762C1AC2061ED0100329A85 /* BlockItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1AA2061ED0100329A85 /* BlockItemManager.swift */; };
-		476499492062F6C3006BB173 /* BlockerListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476499482062F6C3006BB173 /* BlockerListManager.swift */; };
-		4764994A2062F6C7006BB173 /* BlockerListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476499482062F6C3006BB173 /* BlockerListManager.swift */; };
+		4762C1AB2061ED0100329A85 /* BlockerItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1AA2061ED0100329A85 /* BlockerItemManager.swift */; };
+		4762C1AC2061ED0100329A85 /* BlockerItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1AA2061ED0100329A85 /* BlockerItemManager.swift */; };
+		476499492062F6C3006BB173 /* BlockerFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476499482062F6C3006BB173 /* BlockerFileManager.swift */; };
+		4764994A2062F6C7006BB173 /* BlockerFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476499482062F6C3006BB173 /* BlockerFileManager.swift */; };
+		47662FA5206477E600F1317F /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47662FA4206477E600F1317F /* EnumCollection.swift */; };
+		47662FA72064781200F1317F /* BlockerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47662FA62064781200F1317F /* BlockerDataSource.swift */; };
+		47662FA820647BB200F1317F /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47662FA4206477E600F1317F /* EnumCollection.swift */; };
+		47662FA920647BB400F1317F /* BlockerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47662FA62064781200F1317F /* BlockerDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,10 +88,12 @@
 		2578B2B3206183FD0010B271 /* ContentBlockerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerRequestHandler.swift; sourceTree = "<group>"; };
 		2578B2B5206183FD0010B271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4762C1A62061E5DC00329A85 /* BlockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockList.swift; sourceTree = "<group>"; usesTabs = 0; };
-		4762C1AA2061ED0100329A85 /* BlockItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockItemManager.swift; sourceTree = "<group>"; };
-		476499482062F6C3006BB173 /* BlockerListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerListManager.swift; sourceTree = "<group>"; };
+		4762C1AA2061ED0100329A85 /* BlockerItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerItemManager.swift; sourceTree = "<group>"; };
+		476499482062F6C3006BB173 /* BlockerFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerFileManager.swift; sourceTree = "<group>"; };
 		47662FA120642AE700F1317F /* blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = blocker.entitlements; sourceTree = "<group>"; };
 		47662FA220642BE000F1317F /* blocker-extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "blocker-extension.entitlements"; sourceTree = "<group>"; };
+		47662FA4206477E600F1317F /* EnumCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumCollection.swift; sourceTree = "<group>"; };
+		47662FA62064781200F1317F /* BlockerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,7 @@
 			children = (
 				47662FA120642AE700F1317F /* blocker.entitlements */,
 				4762C1A92061ECED00329A85 /* Managers */,
+				47662FA3206477D500F1317F /* Protocols */,
 				4762C1A52061E5AC00329A85 /* Models */,
 				2578B27A20617F530010B271 /* AppDelegate.swift */,
 				2578B27C20617F530010B271 /* ViewController.swift */,
@@ -202,10 +209,19 @@
 		4762C1A92061ECED00329A85 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				4762C1AA2061ED0100329A85 /* BlockItemManager.swift */,
-				476499482062F6C3006BB173 /* BlockerListManager.swift */,
+				4762C1AA2061ED0100329A85 /* BlockerItemManager.swift */,
+				476499482062F6C3006BB173 /* BlockerFileManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		47662FA3206477D500F1317F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				47662FA4206477E600F1317F /* EnumCollection.swift */,
+				47662FA62064781200F1317F /* BlockerDataSource.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,10 +402,12 @@
 			files = (
 				4762C1A72061E5DC00329A85 /* BlockList.swift in Sources */,
 				2578B28320617F530010B271 /* blocker.xcdatamodeld in Sources */,
-				4762C1AB2061ED0100329A85 /* BlockItemManager.swift in Sources */,
+				4762C1AB2061ED0100329A85 /* BlockerItemManager.swift in Sources */,
 				2578B27D20617F530010B271 /* ViewController.swift in Sources */,
+				47662FA5206477E600F1317F /* EnumCollection.swift in Sources */,
 				2578B27B20617F530010B271 /* AppDelegate.swift in Sources */,
-				476499492062F6C3006BB173 /* BlockerListManager.swift in Sources */,
+				476499492062F6C3006BB173 /* BlockerFileManager.swift in Sources */,
+				47662FA72064781200F1317F /* BlockerDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,10 +415,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4762C1AC2061ED0100329A85 /* BlockItemManager.swift in Sources */,
+				4762C1AC2061ED0100329A85 /* BlockerItemManager.swift in Sources */,
+				47662FA920647BB400F1317F /* BlockerDataSource.swift in Sources */,
 				4762C1A82061E5DC00329A85 /* BlockList.swift in Sources */,
 				2578B29320617F530010B271 /* blockerTests.swift in Sources */,
-				4764994A2062F6C7006BB173 /* BlockerListManager.swift in Sources */,
+				47662FA820647BB200F1317F /* EnumCollection.swift in Sources */,
+				4764994A2062F6C7006BB173 /* BlockerFileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  BlockerListManager.swift
+//  BlockerFileManager.swift
 //  blocker
 //
 //  Created by Rudy Bermudez on 3/21/18.
@@ -9,11 +9,14 @@
 import Foundation
 import SafariServices
 
+/// Models JSON
 fileprivate typealias JSON = [String:Any]
+
+// Models JSON Array
 fileprivate typealias BlockerList = [JSON]
 
 /// Manages any FileHandling of JSON BlockerList
-public class BlockerListManager {
+public class BlockerFileManager {
     
     // MARK: - Properties
     
@@ -24,7 +27,8 @@ public class BlockerListManager {
     let fileManager = FileManager.default
     
     
-    // MARK: - Init
+    // MARK: - Initializer
+    
     /// Default Initializer sets `blockerListURL`
     init() {
         var baseURL: URL?
@@ -83,7 +87,7 @@ public class BlockerListManager {
     /// - Returns: Bool that denotes whether the blockerList was successfully created
     @discardableResult
     public func createEmptyBlockerFile() -> Bool {
-         guard let url = blockerListURL, fileManager.fileExists(atPath: url.path) == false else { return false }
+        guard let url = blockerListURL, fileManager.fileExists(atPath: url.path) == false else { return false }
         
         return write(readBlockerList())
     }
@@ -105,22 +109,20 @@ public class BlockerListManager {
     // MARK: - Helper Functions
     
     
-    /// Add `BlockItem` to `blockerList`
+    /// Add `BlockerDataSource` to `BlockerList`
     ///
-    /// - Parameters:
-    ///   - blockItem: `BlockItem` to add
-    ///   - blockerList: `BlockerList` to add to
-    /// - Returns: Bool that denotes whether the `BlockItem` was successfully added to the `BlockerList`
+    /// - Parameter item: `BlockerDataSource` to add to BlockerList
+    /// - Returns: Bool that denotes whether the `BlockerItemDataSource` was successfully added to the `BlockerList`
     @discardableResult
-    func add<T: BlockItem>(blockItem: T) -> Bool {
+    func add<T: BlockerDataSource>(_ item: T) -> Bool {
         
         var blockerList = readBlockerList()
         
-        guard index(of: blockItem, in: blockerList) == nil else { return false }
+        guard index(of: item, in: blockerList) == nil else { return false }
         
         let json: [String:Any] = [
             "action": [ "type": "block" ],
-            "trigger": [ "url-filter": blockItem.urlFilter ]
+            "trigger": [ "url-filter": item.urlFilter ]
         ]
         
         // BlockerList is initalized with an empty dictionary, it is important to overwrite it
@@ -133,31 +135,29 @@ public class BlockerListManager {
     }
     
     
-    /// Remove BlockItem from blockerList
+    /// Remove `BlockerDataSource` from `BlockerList`
     ///
-    /// - Parameters:
-    ///   - blockItem: `BlockItem` to remove
-    ///   - blockerList: `BlockerList` to remove from
-    /// - Returns: Bool that denotes whether the `BlockItem` was successfully removed from the `Blockerlist`
+    /// - Parameter item: `BlockerDataSource` to remove from BlockerList
+    /// - Returns: Bool that denotes whether the `BlockerDataSource` was successfully removed from the `Blockerlist`
     @discardableResult
-    func remove<T: BlockItem>(blockItem: T) -> Bool {
+    func remove<T: BlockerDataSource>(_ item: T) -> Bool {
         
         var blockerList = readBlockerList()
         
-        guard let index = index(of: blockItem, in: blockerList) else { return false }
+        guard let index = index(of: item, in: blockerList) else { return false }
         
         blockerList.remove(at: index)
         return write(blockerList)
     }
     
     
-    /// Retrieve the index of a `BlockItem` in a `BlockerList`
+    /// Retrieve the index of a `BlockerDataSource` in a `BlockerList`
     ///
     /// - Parameters:
+    ///   - blockItem: `BlockerDataSource` to check for
     ///   - blockerList: A JSON Array [[String: Any]]
-    ///   - blockItem: A `BlockItem` to check for
-    /// - Returns: Optional `Int` that denotes the index of a `BlockItem` in the `BlockerList`
-    fileprivate func index<T: BlockItem>(of blockItem: T, in blockerList: BlockerList) -> Int? {
+    /// - Returns: `Int` that denotes the index of a `BlockerDataSource` in the `BlockerList`; `nil` if not found
+    fileprivate func index<T: BlockerDataSource>(of blockItem: T, in blockerList: BlockerList) -> Int? {
         
         for (index, item) in blockerList.enumerated() {
             guard
@@ -172,15 +172,15 @@ public class BlockerListManager {
     }
     
     
-    
-    /// Return a list of actively blocked `BlockItem` in BlockerList
+    /// Return a list of actively blocked `BlockerDataSource` in BlockerList
     ///
-    /// - Parameter blockItem: `BlockItem` Enum to search for
-    /// - Returns: A List of active `BlockItem`
-    func getEnabledItems<T>(blockItem: T.Type) -> [T] where T: EnumCollection & BlockItem {
-        return blockItem.cases().flatMap { index(of: $0, in: readBlockerList()) != nil ?  $0 : nil }
+    /// - Parameter type: `BlockerDataSourceCollection` to check for
+    /// - Returns: A List of active `BlockerDataSource`
+    func getEnabledItems<T: BlockerDataSourceCollection>(of type: T.Type) -> [T] {
+        return type.cases().flatMap { index(of: $0, in: readBlockerList()) != nil ?  $0 : nil }
     }
     
+    // MARK: - Debugging Functions
     
     /// Pretty Print the JSON BlockerList
     func debugPrint() {

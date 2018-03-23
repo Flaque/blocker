@@ -9,36 +9,10 @@
 import Foundation
 
 
-protocol BlockItem {
-    
-    /// The base URL to filter out
-    var urlFilter: String { get }
-    
-    /// The `NSItemProvider` that of a json file that contains urls to block for a given item. Note this is optional.
-    var blocklist: NSItemProvider? { get }
-}
+/// Social Network Sources
+enum Social: BlockerDataSource, EnumCollection {
 
-protocol EnumCollection : Hashable {}
-
-extension EnumCollection {
-    static func cases() -> AnySequence<Self> {
-        typealias S = Self
-        return AnySequence { () -> AnyIterator<S> in
-            var raw = 0
-            return AnyIterator {
-                let current : Self = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: S.self, capacity: 1) { $0.pointee } }
-                guard current.hashValue == raw else { return nil }
-                raw += 1
-                return current
-            }
-        }
-    }
-}
-
-
-// Social Network Sources
-enum Social: BlockItem, EnumCollection {
-    
+    // MARK: - Sources
     case facebook
     case fourchan
     case gplus
@@ -51,10 +25,9 @@ enum Social: BlockItem, EnumCollection {
     case twitter
     case youtube
     
-    var blocklist: NSItemProvider? {
-        return nil
-    }
+    // MARK: - Properties
     
+    /// The base URL to filter out
     var urlFilter: String {
         switch self {
         case .fourchan:
@@ -87,8 +60,9 @@ enum Social: BlockItem, EnumCollection {
 
 
 /// News Sources
-enum News: BlockItem, EnumCollection {
+enum News: BlockerDataSource, EnumCollection {
     
+    // MARK: - Sources
     case abc
     case aljazeera
     case bloomberg
@@ -113,10 +87,7 @@ enum News: BlockItem, EnumCollection {
     case usatoday
     case washingtonpost
     
-    var blocklist: NSItemProvider? {
-        return nil
-    }
-    
+    // MARK: - Properties
     var urlFilter: String {
         switch self {
         case .abc:

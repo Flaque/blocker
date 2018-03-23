@@ -19,27 +19,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let jsonManager = BlockerListManager()
-        let itemManager = BlockItemManager(listManager: jsonManager)
-        jsonManager.createEmptyBlockerFile()
+        let fileManager = BlockerFileManager()
+        let itemManager = BlockerItemManager(fileManager: fileManager)
+        fileManager.createEmptyBlockerFile()
         
         print(itemManager.toggle(item: Social.imgur, enable: false))
         print(itemManager.toggle(item: Social.facebook, enable: false))
         print(itemManager.toggle(item: Social.instagram, enable: false))
-        jsonManager.debugPrint()
+        fileManager.debugPrint()
         
         print(itemManager.toggle(item: Social.facebook, enable: true))
-        jsonManager.debugPrint()
+        fileManager.debugPrint()
         
         print(itemManager.toggle(item: Social.facebook, enable: false))
-        jsonManager.debugPrint()
+        fileManager.debugPrint()
         
         print(itemManager.toggle(item: Social.facebook, enable: true))
         print(itemManager.toggle(item: Social.imgur, enable: true))
         print(itemManager.toggle(item: Social.fourchan, enable: true))
         print(itemManager.toggle(item: Social.reddit, enable: false))
-        jsonManager.debugPrint()
-        print(itemManager.activeItems(type: Social.self))
+        fileManager.debugPrint()
+        
+        print(itemManager.getActiveItems(type: Social.self))
         
         return true
     }
