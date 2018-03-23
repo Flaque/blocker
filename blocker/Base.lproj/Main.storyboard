@@ -1,24 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="blocker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nML-uo-sbv">
+                                <rect key="frame" x="0.0" y="10" width="375" height="667"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MVa-T6-kVk">
+                                        <rect key="frame" x="27" y="35" width="320" height="400"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block a Site" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTS-mh-uZH">
+                                                <rect key="frame" x="0.0" y="0.0" width="182" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="JdL-Ft-qX1"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
+                                                <color key="textColor" red="0.18823529410000001" green="0.22352941179999999" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wb9-6O-OHs">
+                                                <rect key="frame" x="0.0" y="47" width="320" height="32"/>
+                                                <color key="backgroundColor" red="0.84313725490000002" green="0.86274509799999999" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="5E4-PG-kZ3"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.18823529411764706" green="0.22352941176470589" blue="0.32156862745098042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" textContentType="url"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="ReturnPressed:forEvent:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="zbv-cX-lGK"/>
+                                                </connections>
+                                            </textField>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmV-d5-Dyg">
+                                                <rect key="frame" x="0.0" y="94" width="320" height="306"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="XmV-d5-Dyg" firstAttribute="width" secondItem="MVa-T6-kVk" secondAttribute="width" id="F0i-Kc-Etr"/>
+                                            <constraint firstAttribute="height" constant="400" id="PRp-Sr-zmX"/>
+                                            <constraint firstItem="Wb9-6O-OHs" firstAttribute="width" secondItem="MVa-T6-kVk" secondAttribute="width" id="e2J-73-J0q"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MVa-T6-kVk" firstAttribute="centerX" secondItem="nML-uo-sbv" secondAttribute="centerX" id="7HV-WV-64v"/>
+                                    <constraint firstItem="MVa-T6-kVk" firstAttribute="top" secondItem="nML-uo-sbv" secondAttribute="top" constant="35" id="Hv6-cA-Xyh"/>
+                                    <constraint firstAttribute="bottom" secondItem="MVa-T6-kVk" secondAttribute="bottom" constant="232" id="efK-Vv-niU"/>
+                                    <constraint firstItem="MVa-T6-kVk" firstAttribute="leading" secondItem="nML-uo-sbv" secondAttribute="leading" constant="27" id="fBR-LS-AbC"/>
+                                    <constraint firstAttribute="trailing" secondItem="MVa-T6-kVk" secondAttribute="trailing" constant="28" id="fOa-W8-skI"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nML-uo-sbv" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="Tzs-ty-zga"/>
+                            <constraint firstItem="nML-uo-sbv" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="bzl-UY-jLb"/>
+                            <constraint firstItem="nML-uo-sbv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fcv-hV-GeG"/>
+                            <constraint firstItem="nML-uo-sbv" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ruJ-Db-Zce"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="135.19999999999999" y="123.68815592203899"/>
         </scene>
     </scenes>
 </document>

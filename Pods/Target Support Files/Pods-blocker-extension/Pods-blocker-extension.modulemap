@@ -1,0 +1,6 @@
+framework module Pods_blocker_extension {
+  umbrella header "Pods-blocker-extension-umbrella.h"
+
+  export *
+  module * { export * }
+}

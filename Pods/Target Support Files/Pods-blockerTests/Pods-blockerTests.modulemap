@@ -1,0 +1,6 @@
+framework module Pods_blockerTests {
+  umbrella header "Pods-blockerTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
