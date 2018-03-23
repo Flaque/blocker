@@ -152,7 +152,7 @@ public class BlockerFileManager {
     
     
     /// Retrieve the index of a `BlockerDataSource` in a `BlockerList`
-    ///
+    /// Note: This checks the urlFilter Property of the `BlockerDataSource`
     /// - Parameters:
     ///   - blockItem: `BlockerDataSource` to check for
     ///   - blockerList: A JSON Array [[String: Any]]

@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(itemManager.toggle(item: Social.imgur, enable: true))
         print(itemManager.toggle(item: Social.fourchan, enable: true))
         print(itemManager.toggle(item: Social.reddit, enable: false))
+        print(itemManager.toggle(item: Custom.custom(urlFilter: ".*bbc.*"), enable: false))
         fileManager.debugPrint()
         
         print(itemManager.getActiveItems(type: Social.self))
