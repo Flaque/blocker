@@ -14,12 +14,12 @@
 		2578B28320617F530010B271 /* blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2578B28120617F530010B271 /* blocker.xcdatamodeld */; };
 		2578B28520617F530010B271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2578B28420617F530010B271 /* Assets.xcassets */; };
 		2578B28820617F530010B271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2578B28620617F530010B271 /* LaunchScreen.storyboard */; };
-		2578B29320617F530010B271 /* blockerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578B29220617F530010B271 /* blockerTests.swift */; };
 		2578B29E20617F530010B271 /* blockerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578B29D20617F530010B271 /* blockerUITests.swift */; };
 		2578B2B2206183FD0010B271 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2578B2B1206183FD0010B271 /* blockerList.json */; };
 		2578B2B4206183FD0010B271 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578B2B3206183FD0010B271 /* ContentBlockerRequestHandler.swift */; };
 		2578B2B8206183FD0010B271 /* blocker-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2578B2AF206183FD0010B271 /* blocker-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25D1459620658F8F0077D631 /* Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D1459520658F8F0077D631 /* Borders.swift */; };
+		25D145992065C7060077D631 /* BlockerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D145982065C7060077D631 /* BlockerTests.swift */; };
 		433DC8F2D84F2AEA3C3B8735 /* Pods_blocker_extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93B232544E8B5238D626A27 /* Pods_blocker_extension.framework */; };
 		4762C1A72061E5DC00329A85 /* BlockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1A62061E5DC00329A85 /* BlockList.swift */; };
 		4762C1A82061E5DC00329A85 /* BlockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C1A62061E5DC00329A85 /* BlockList.swift */; };
@@ -84,7 +84,6 @@
 		2578B28720617F530010B271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2578B28920617F530010B271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2578B28E20617F530010B271 /* blockerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = blockerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2578B29220617F530010B271 /* blockerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blockerTests.swift; sourceTree = "<group>"; };
 		2578B29420617F530010B271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2578B29920617F530010B271 /* blockerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = blockerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2578B29D20617F530010B271 /* blockerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blockerUITests.swift; sourceTree = "<group>"; };
@@ -94,6 +93,7 @@
 		2578B2B3206183FD0010B271 /* ContentBlockerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerRequestHandler.swift; sourceTree = "<group>"; };
 		2578B2B5206183FD0010B271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25D1459520658F8F0077D631 /* Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Borders.swift; sourceTree = "<group>"; };
+		25D145982065C7060077D631 /* BlockerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerTests.swift; sourceTree = "<group>"; };
 		304041FA2AAB6E05ED8024AB /* Pods_blockerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_blockerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34D142DE0039E4E90ACE599A /* Pods-blockerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blockerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-blockerUITests/Pods-blockerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3C75DE0E2BC3AE53C2011BF2 /* Pods-blockerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blockerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-blockerTests/Pods-blockerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,8 +197,8 @@
 		2578B29120617F530010B271 /* blockerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2578B29220617F530010B271 /* blockerTests.swift */,
 				2578B29420617F530010B271 /* Info.plist */,
+				25D145982065C7060077D631 /* BlockerTests.swift */,
 			);
 			path = blockerTests;
 			sourceTree = "<group>";
@@ -621,10 +621,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-blocker/Pods-blocker-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/Houston/Houston.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Houston.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -672,8 +674,8 @@
 				4762C1AC2061ED0100329A85 /* BlockerItemManager.swift in Sources */,
 				47662FA920647BB400F1317F /* BlockerDataSource.swift in Sources */,
 				4762C1A82061E5DC00329A85 /* BlockList.swift in Sources */,
-				2578B29320617F530010B271 /* blockerTests.swift in Sources */,
 				47662FA820647BB200F1317F /* EnumCollection.swift in Sources */,
+				25D145992065C7060077D631 /* BlockerTests.swift in Sources */,
 				4764994A2062F6C7006BB173 /* BlockerFileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

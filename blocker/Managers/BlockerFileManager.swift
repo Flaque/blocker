@@ -43,6 +43,10 @@ public class BlockerFileManager {
         
     }
     
+    init(baseURL : URL) {
+        blockerListURL = baseURL.appendingPathComponent("CustomBlockerList.json", isDirectory: false)
+    }
+    
     
     // MARK: - Read / Write JSON
     

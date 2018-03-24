@@ -1,36 +1,67 @@
 //
-//  blockerTests.swift
+//  BlockerTests.swift
 //  blockerTests
 //
-//  Created by Evan Conrad on 3/20/18.
-//  Copyright © 2018 Evan Conrad. All rights reserved.
+//  Created by Evan Conrad on 3/23/18.
+//  Copyright © 2018 Evan Conrad & Rudy Bermudez. All rights reserved.
 //
 
 import XCTest
-@testable import blocker
 
-class blockerTests: XCTestCase {
+class BlockerTests: XCTestCase {
     
+    var itemManager : BlockerItemManager?
+    var tmpdir : URL?
+
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        tmpdir = FileManager.default.temporaryDirectory
+        let fileManager = BlockerFileManager(baseURL: FileManager.default.temporaryDirectory)
+        itemManager = BlockerItemManager(fileManager: fileManager)
+        fileManager.createEmptyBlockerFile()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-    }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        do {
+            try FileManager.default.removeItem(at: tmpdir!)
+        } catch let error  {
+            print(error.localizedDescription)
         }
+    }
+    
+    func testCreatingAManagerDoesntCrash() {
+        let fileManager = BlockerFileManager()
+        _ = BlockerItemManager(fileManager: fileManager)
+        fileManager.createEmptyBlockerFile()
+        // we didnt crash, yay!
+    }
+    
+    func testCreatingASimpleManagerDoesntCrash() {
+        _ = BlockerItemManager()
+        // we didnt crash, yay!
+    }
+
+    func testTogglingAnItemFalse() {
+        
+        let toggled = itemManager!.toggle(item: Social.imgur, enable: true)
+        XCTAssertTrue(toggled)
+        
+        let items = itemManager!.getActiveItems(type: Social.self)
+
+        XCTAssert(items.count == 1)
+        XCTAssert(items[0] == Social.imgur)
+    }
+    
+    func testTogglingAnItemTwice() {
+        
+        let toggled = itemManager!.toggle(item: Social.facebook, enable: false)
+        XCTAssertTrue(toggled)
+        
+        let toggledAgain = itemManager!.toggle(item: Social.facebook, enable: true)
+        XCTAssertTrue(toggledAgain)
     }
     
 }

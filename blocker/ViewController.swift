@@ -10,10 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let blockerItems : BlockerItemManager
+    private let itemManager : BlockerItemManager
     
     required init?(coder aDecoder: NSCoder) {
-        self.blockerItems = BlockerItemManager()
+        self.itemManager = BlockerItemManager()
         super.init(coder: aDecoder)
     }
     
@@ -32,7 +32,12 @@ class ViewController: UIViewController {
             return
         }
         
+        let success = itemManager.toggle(item: Custom.custom(urlFilter: text), enable: true)
+        
+        print(success)
         print(text) // TODO: create new BlockerDataSource, add it to the blocker item manager
+        
+        print(itemManager.getActiveItems(type: Custom.self))
     }
     
 }

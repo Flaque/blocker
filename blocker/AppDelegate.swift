@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SafariServices
+import Houston
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,10 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let consoleDestination = ConsoleDestination()
+        Logger.add(destination: consoleDestination)
+        
         let fileManager = BlockerFileManager()
         let itemManager = BlockerItemManager(fileManager: fileManager)
         fileManager.createEmptyBlockerFile()
-        
+
         print(itemManager.toggle(item: Social.imgur, enable: false))
         print(itemManager.toggle(item: Social.facebook, enable: false))
         print(itemManager.toggle(item: Social.instagram, enable: false))
@@ -30,17 +34,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print(itemManager.toggle(item: Social.facebook, enable: true))
         fileManager.debugPrint()
-        
+
         print(itemManager.toggle(item: Social.facebook, enable: false))
         fileManager.debugPrint()
-        
+
         print(itemManager.toggle(item: Social.facebook, enable: true))
         print(itemManager.toggle(item: Social.imgur, enable: true))
         print(itemManager.toggle(item: Social.fourchan, enable: true))
         print(itemManager.toggle(item: Social.reddit, enable: false))
         print(itemManager.toggle(item: Custom.custom(urlFilter: ".*bbc.*"), enable: false))
         fileManager.debugPrint()
-        
+
         print(itemManager.getActiveItems(type: Social.self))
         
         return true

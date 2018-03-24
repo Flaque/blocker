@@ -42,6 +42,7 @@ class BlockerItemManager {
     ///   - item: `BlockerDataSource` to add / remove from Blocking
     ///   - enable: enable/disable the blockItem
     /// - Returns: Boolean that denotes a successful toggle
+    @discardableResult
     func toggle<T: BlockerDataSource>(item: T, enable: Bool) -> Bool {
         return enable ? fileManager.add(item) : fileManager.remove(item)
     }

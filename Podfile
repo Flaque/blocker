@@ -7,6 +7,7 @@ target 'blocker' do
 
   # Pods for blocker
   pod 'Eureka', '~> 4.1'
+  pod 'Houston'
 
   target 'blockerTests' do
     inherit! :search_paths
