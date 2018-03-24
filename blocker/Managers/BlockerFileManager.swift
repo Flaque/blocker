@@ -8,6 +8,7 @@
 
 import Foundation
 import SafariServices
+import Houston
 
 /// Models JSON
 fileprivate typealias JSON = [String:Any]
@@ -76,13 +77,24 @@ public class BlockerFileManager {
     /// - Returns: Bool that denotes whether the blockerList was successfully written to file
     fileprivate func write(_ blockerList: BlockerList) -> Bool {
         
-        guard
-            let url = blockerListURL,
-            let jsonData = try? JSONSerialization.data(withJSONObject: blockerList, options: []),
-            let _ = try? jsonData.write(to: url)
-        else {
+        // Grab url
+        guard let url = blockerListURL else {
+            Logger.error("BlockerListURL fails to conform to let assignment when trying to write")
             return false
         }
+        
+        // Parse JSON data
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: blockerList, options: []) else {
+            Logger.error("JSON data failed to serialize when writing data to " + url.absoluteString)
+            return false
+        }
+        
+        // Failed to write data
+        guard let _ = try? jsonData.write(to: url) else {
+            Logger.error("JSON data failed to write to " + url.absoluteString)
+            return false
+        }
+        
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: "io.rudybermudez.blocker.extension", completionHandler: nil)
         return true
     }

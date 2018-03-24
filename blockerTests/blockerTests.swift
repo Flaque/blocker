@@ -10,26 +10,25 @@ import XCTest
 
 class BlockerTests: XCTestCase {
     
-    var itemManager : BlockerItemManager?
-    var tmpdir : URL?
-
-    override func setUp() {
-        super.setUp()
+    func tmpItemManager() -> BlockerItemManager {
         
-        tmpdir = FileManager.default.temporaryDirectory
-        let fileManager = BlockerFileManager(baseURL: FileManager.default.temporaryDirectory)
-        itemManager = BlockerItemManager(fileManager: fileManager)
-        fileManager.createEmptyBlockerFile()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    
+        // Setup a temporary folder that we can run each test in.
+        let tmp = FileManager.default.temporaryDirectory
+        let randoFolder = UUID().uuidString
+        let baseURL : URL = tmp.appendingPathComponent(randoFolder, isDirectory: true)
+        
+        // Attempt to create the directory
         do {
-            try FileManager.default.removeItem(at: tmpdir!)
-        } catch let error  {
+           try FileManager.default.createDirectory(at: baseURL, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError{
             print(error.localizedDescription)
         }
+        
+        let fileManager = BlockerFileManager(baseURL: baseURL)
+        let itemManager = BlockerItemManager(fileManager: fileManager)
+        fileManager.createEmptyBlockerFile()
+        
+        return itemManager
     }
     
     func testCreatingAManagerDoesntCrash() {
@@ -45,23 +44,42 @@ class BlockerTests: XCTestCase {
     }
 
     func testTogglingAnItemFalse() {
+        let itemManager = tmpItemManager()
         
-        let toggled = itemManager!.toggle(item: Social.imgur, enable: true)
+        let toggled = itemManager.toggle(item: Social.imgur, enable: false)
+        XCTAssertFalse(toggled)
+    }
+    
+    func testTogglingAnItemTrue() {
+        let itemManager = tmpItemManager()
+    
+        let toggled = itemManager.toggle(item: Social.imgur, enable: true)
         XCTAssertTrue(toggled)
-        
-        let items = itemManager!.getActiveItems(type: Social.self)
-
-        XCTAssert(items.count == 1)
-        XCTAssert(items[0] == Social.imgur)
+    
+        let items = itemManager.getActiveItems(type: Social.self)
+    
+        XCTAssert(items.count == 1 && items[0] == Social.imgur)
     }
     
     func testTogglingAnItemTwice() {
+        let itemManager = tmpItemManager()
         
-        let toggled = itemManager!.toggle(item: Social.facebook, enable: false)
+        let toggled = itemManager.toggle(item: Social.facebook, enable: true)
         XCTAssertTrue(toggled)
         
-        let toggledAgain = itemManager!.toggle(item: Social.facebook, enable: true)
+        let toggledAgain = itemManager.toggle(item: Social.facebook, enable: false)
         XCTAssertTrue(toggledAgain)
+    }
+    
+    func testTogglingCustomItem() {
+        let itemManager = tmpItemManager()
+        let customType = Custom.custom(urlFilter: ".*winglejangle.*")
+        let toggled = itemManager.toggle(item: customType, enable: true)
+        XCTAssertFalse(toggled)
+        
+        let items = itemManager.getActiveItems(type: Custom.self)
+        
+        XCTAssert(items.count == 1 && items[0] == customType)
     }
     
 }

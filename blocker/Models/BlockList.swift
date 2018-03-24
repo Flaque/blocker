@@ -154,7 +154,7 @@ enum Custom: BlockerDataSourceCollection {
     }
     
     var hashValue: Int {
-        return self.urlFilter.hashValue
+        return urlFilter.hashValue
     }
     
     static func ==(lhs: Custom, rhs: Custom) -> Bool {
