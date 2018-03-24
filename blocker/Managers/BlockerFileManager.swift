@@ -21,7 +21,7 @@ public class BlockerFileManager {
     // MARK: - Properties
     
     /// The `URL` of the file where the blockerList will be saved
-    public var blockerListURL: URL?
+    private var blockerListURL: URL?
     
     /// Default instance of FileManager
     let fileManager = FileManager.default
@@ -38,13 +38,17 @@ public class BlockerFileManager {
         }
         
         if let baseURL = baseURL {
-            blockerListURL = baseURL.appendingPathComponent("CustomBlockerList.json", isDirectory: false)
+            self.blockerListURL = baseURL.appendingPathComponent("CustomBlockerList.json", isDirectory: false)
         }
         
     }
     
-    init(baseURL : URL) {
-        blockerListURL = baseURL.appendingPathComponent("CustomBlockerList.json", isDirectory: false)
+    
+    /// Initalizer that allows for a custom directory URL
+    ///
+    /// - Parameter baseURL: URL of directory where CustomBlockerList.json will be stored
+    init(baseURL: URL) {
+        self.blockerListURL = baseURL.appendingPathComponent("CustomBlockerList.json", isDirectory: false)
     }
     
     
