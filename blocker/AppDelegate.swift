@@ -23,29 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let consoleDestination = ConsoleDestination()
         Logger.add(destination: consoleDestination)
         
-//        let fileManager = BlockerFileManager()
-//        let itemManager = BlockerItemManager(fileManager: fileManager)
-//        fileManager.createEmptyBlockerFile()
-//
-//        print(itemManager.toggle(item: Social.imgur, enable: false))
-//        print(itemManager.toggle(item: Social.facebook, enable: false))
-//        print(itemManager.toggle(item: Social.instagram, enable: false))
-//        fileManager.debugPrint()
-//        
-//        print(itemManager.toggle(item: Social.facebook, enable: true))
-//        fileManager.debugPrint()
-//
-//        print(itemManager.toggle(item: Social.facebook, enable: false))
-//        fileManager.debugPrint()
-//
-//        print(itemManager.toggle(item: Social.facebook, enable: true))
-//        print(itemManager.toggle(item: Social.imgur, enable: true))
-//        print(itemManager.toggle(item: Social.fourchan, enable: true))
-//        print(itemManager.toggle(item: Social.reddit, enable: false))
-//        print(itemManager.toggle(item: Custom.custom(urlFilter: ".*bbc.*"), enable: false))
-//        fileManager.debugPrint()
-//
-//        print(itemManager.getActiveItems(type: Social.self))
+        let fileManager = BlockerFileManager()
+        let itemManager = BlockerItemManager(fileManager: fileManager)
+        fileManager.deleteBlockerFile()
+        fileManager.createEmptyBlockerFile()
+        itemManager.toggle(item: Social.imgur, enable: true)
+        itemManager.toggle(item: BlockerItem(urlFilter: ".*something.*"), enable: false)
+        print(BlockerItem(url: "http://www.maps.google.com")?.urlFilter)
+        print(BlockerItem(url: "www.maps.google.com")?.urlFilter)
+        print(BlockerItem(url: "maps.google.com")?.urlFilter)
+        fileManager.debugPrint()
+        print(itemManager.getActiveItems())
         
         return true
     }

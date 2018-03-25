@@ -28,16 +28,19 @@ class ViewController: UIViewController {
     }
 
     @IBAction func ReturnPressed(_ sender: UITextField, forEvent event: UIEvent) {
-        guard let text = sender.text else {
+        guard
+            let text = sender.text,
+            let validItem = BlockerItem(url: text)
+        else {
             return
         }
         
-        let success = itemManager.toggle(item: Custom.custom(urlFilter: text), enable: true)
+        let success = itemManager.toggle(item: validItem, enable: true)
         
         print(success)
         print(text) // TODO: create new BlockerDataSource, add it to the blocker item manager
         
-        print(itemManager.getActiveItems(type: Custom.self))
+        print(itemManager.getActiveItems())
     }
     
 }

@@ -52,8 +52,8 @@ class BlockerItemManager {
     ///
     /// - Parameter type: type that conforms to `BlockerDataSourceCollection`
     /// - Returns: List of enabled `BlockerItemDataSource` in BlockerFile
-    func getActiveItems<T: BlockerDataSourceCollection>(type: T.Type) -> [T] {
-        return fileManager.getEnabledItems(of: type)
+    func getActiveItems() -> [BlockerItem] {
+        return fileManager.getEnabledItems()
     }
     
 }

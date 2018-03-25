@@ -8,10 +8,7 @@
 
 import Foundation
 
-
-/// BlockerDataSource that can be put into a collection
-typealias BlockerDataSourceCollection = BlockerDataSource & EnumCollection
-
+typealias EnumBlockerDataSource = BlockerDataSource & EnumCollection
 
 /// Models the Data Source of an Item to Block
 protocol BlockerDataSource {
@@ -19,4 +16,7 @@ protocol BlockerDataSource {
     /// The base URL to filter out
     var urlFilter: String { get }
     
+    /// Category of the DataSource
+    var category: BlockerItemCategory { get }
 }
+

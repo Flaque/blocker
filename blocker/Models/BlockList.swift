@@ -10,8 +10,8 @@ import Foundation
 
 
 /// Social Network Sources
-enum Social: BlockerDataSourceCollection {
-
+enum Social: EnumBlockerDataSource {
+    
     // MARK: - Sources
     case facebook
     case fourchan
@@ -26,6 +26,10 @@ enum Social: BlockerDataSourceCollection {
     case youtube
     
     // MARK: - Properties
+    
+    var category: BlockerItemCategory {
+        return .social
+    }
     
     /// The base URL to filter out
     var urlFilter: String {
@@ -60,7 +64,7 @@ enum Social: BlockerDataSourceCollection {
 
 
 /// News Sources
-enum News: BlockerDataSourceCollection {
+enum News: EnumBlockerDataSource {
     
     // MARK: - Sources
     case abc
@@ -88,6 +92,11 @@ enum News: BlockerDataSourceCollection {
     case washingtonpost
     
     // MARK: - Properties
+
+    var category: BlockerItemCategory {
+        return .news
+    }
+    
     var urlFilter: String {
         switch self {
         case .abc:
@@ -137,28 +146,6 @@ enum News: BlockerDataSourceCollection {
         case .washingtonpost:
             return ".*washingtonpost.*"
         }
-    }
-}
-
-
-/// Models a Custom URL to block
-enum Custom: BlockerDataSourceCollection {
-    
-    case custom(urlFilter: String)
-    
-    var urlFilter: String {
-        switch self {
-        case .custom(urlFilter: let url):
-            return url
-        }
-    }
-    
-    var hashValue: Int {
-        return urlFilter.hashValue
-    }
-    
-    static func ==(lhs: Custom, rhs: Custom) -> Bool {
-        return lhs == rhs
     }
 }
 

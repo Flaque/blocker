@@ -192,12 +192,25 @@ public class BlockerFileManager {
     }
     
     
+    
     /// Return a list of actively blocked `BlockerDataSource` in BlockerList
     ///
-    /// - Parameter type: `BlockerDataSourceCollection` to check for
     /// - Returns: A List of active `BlockerDataSource`
-    func getEnabledItems<T: BlockerDataSourceCollection>(of type: T.Type) -> [T] {
-        return type.cases().flatMap { index(of: $0, in: readBlockerList()) != nil ?  $0 : nil }
+    func getEnabledItems() -> [BlockerItem] {
+        let blockerList = readBlockerList()
+        return blockerList.flatMap { (item) in
+            guard
+                let trigger = item["trigger"] as? [String:String],
+                let urlFilter = trigger["url-filter"]
+            else { return nil }
+            
+            let category: BlockerItemCategory =
+                    Social.cases().contains { $0.urlFilter == urlFilter } ? .social
+                    : News.cases().contains {$0.urlFilter == urlFilter } ? .news
+                    : .userDefined
+            
+            return BlockerItem(urlFilter: urlFilter, category: category)
+        }
     }
     
     // MARK: - Debugging Functions
